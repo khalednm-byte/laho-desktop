@@ -1,0 +1,56 @@
+# Gradle
+.gradle/
+build/
+
+# Compiled Java output
+bin/
+out/
+*.class
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Visual Studio Code
+.vscode/
+
+# Java runtime and crash files
+hs_err_pid*
+replay_pid*
+*.log
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Local databases and user data
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Launcher-generated files
+downloads/
+installations/
+installed-games/
+temp/
+tmp/
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Backup and temporary editor files
+*~
+*.bak
+*.swp
+*.swo
