@@ -3,7 +3,7 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
-group = 'com.arabsteam'
+group = 'com.khaled.laho'
 version = '1.0.0'
 
 repositories {
@@ -22,9 +22,8 @@ javafx {
 }
 
 application {
-    // module-info.java declares "module arabSteam" with the Main class in package "model"
-    mainClass = 'model.Main'
-    mainModule = 'arabSteam'
+    mainModule = 'com.khaled.laho'
+    mainClass = 'com.khaled.laho.app.Main'
 }
 
 dependencies {

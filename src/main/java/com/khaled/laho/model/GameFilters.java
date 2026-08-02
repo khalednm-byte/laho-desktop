@@ -1,4 +1,4 @@
-package model;
+package com.khaled.laho.model;
 
 public enum GameFilters {
 	
