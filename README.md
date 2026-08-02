@@ -2,7 +2,7 @@
 
 Laho Desktop is a JavaFX game storefront and launcher prototype built as a portfolio-quality desktop application. The project focuses on clean architecture, local catalog browsing, simulated purchases, persistent libraries, and eventually safe game installation and launching.
 
-> **Project status:** Early development. The existing prototype is being restructured before the main storefront features are implemented.
+> **Project status:** Early development. Repository cleanup and Git setup are complete, and the application structure is now being standardized before the main storefront features are implemented.
 
 ## Current Goal
 
@@ -38,7 +38,7 @@ Build a fully offline desktop experience where a user can:
 
 - Java 21
 - JavaFX 21
-- Gradle
+- Gradle Wrapper
 - JUnit 5
 
 ### Planned for the offline milestone
@@ -81,40 +81,63 @@ Controllers should remain thin. Purchasing, persistence, file handling, download
 
 ## Current State
 
-The repository currently contains an early JavaFX login interface and initial domain classes such as `Game`, `Customer`, `Developer`, `Store`, and `GameFilters`.
+The repository contains an early JavaFX login interface and initial domain classes such as `Game`, `Customer`, `Developer`, `Store`, and `GameFilters`.
 
-The next stage is to clean the project, remove generated and IDE-specific files, standardize the package structure, and replace the early interface with an FXML-based application shell.
+Git setup, repository cleanup, the Gradle wrapper, and the move toward the `com.khaled.laho` package are complete or underway. The next step is to finish the application package structure and replace the early interface with an FXML-based application shell.
 
 ## Getting Started
 
 ### Requirements
 
 - JDK 21
-- Gradle 8 or newer
 
-### Run the application
+The project uses the Gradle Wrapper, so a separate Gradle installation is not required.
+
+### Linux and macOS
+
+Run the application:
 
 ```bash
-gradle run
+./gradlew run
 ```
 
-### Run the tests
+Run the tests:
 
 ```bash
-gradle test
+./gradlew test
 ```
 
-### Build the project
+Build the project:
 
 ```bash
-gradle build
+./gradlew build
+```
+
+### Windows
+
+Run the application:
+
+```powershell
+.\gradlew.bat run
+```
+
+Run the tests:
+
+```powershell
+.\gradlew.bat test
+```
+
+Build the project:
+
+```powershell
+.\gradlew.bat build
 ```
 
 ## Roadmap
 
 ### Milestone 1 — Offline Storefront
 
-- [ ] Clean and reorganize the project
+- [x] Clean and reorganize the project
 - [ ] Create the application package structure
 - [ ] Introduce FXML views and navigation
 - [ ] Improve the game domain model
