@@ -95,19 +95,19 @@ The next stage is to clean the project, remove generated and IDE-specific files,
 ### Run the application
 
 ```bash
-gradle run
+./gradlew run
 ```
 
 ### Run the tests
 
 ```bash
-gradle test
+./gradlew test
 ```
 
 ### Build the project
 
 ```bash
-gradle build
+./gradlew build
 ```
 
 ## Roadmap
