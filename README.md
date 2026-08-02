@@ -110,27 +110,7 @@ Run the tests:
 Build the project:
 
 ```bash
-./gradlew build
-```
-
-### Windows
-
-Run the application:
-
-```powershell
-.\gradlew.bat run
-```
-
-Run the tests:
-
-```powershell
-.\gradlew.bat test
-```
-
-Build the project:
-
-```powershell
-.\gradlew.bat build
+gradle build
 ```
 
 ## Roadmap
