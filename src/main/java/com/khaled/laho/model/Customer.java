@@ -3,7 +3,7 @@ package com.khaled.laho.model;
 import java.util.*;
 
 public class Customer {
-		
+
 	private UUID id;
 	// Account Username
 	private String customerAccountUsername;
@@ -15,10 +15,10 @@ public class Customer {
 	private List<Game> userGameLibrary = new ArrayList<>();
 	// Customer Account Bio
 	private String customerAccountBio = "";
-		
-		// w-i-p...
-	public Customer(String username, String nickname, int accountExperience) {
-		this.id = UUID.randomUUID();
+
+	// w-i-p...
+	public Customer(UUID id ,String username, String nickname, int accountExperience) {
+		this.id = id;
 		this.customerAccountUsername = username;
 		this.customerNickname = nickname;
 		this.customerAccountExperience = accountExperience;

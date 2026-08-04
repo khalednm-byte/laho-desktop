@@ -1,0 +1,22 @@
+package com.khaled.laho.model;
+
+public enum GameGenre {
+	
+	ACTION,
+	ADVENTURE,
+	RPG,
+	SIMULATION,
+	STRATEGY,
+	SPORTS,
+	FIGHTING,
+	SHOOTER,
+	PUZZLE,
+	PLATFORM,
+	STEALTH,
+	SURVIVAL,
+	RACING,
+	HORROR,
+	BATTLE_ROYAL,
+	EDUCATIONAL
+
+}

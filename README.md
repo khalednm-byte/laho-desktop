@@ -81,9 +81,11 @@ Controllers should remain thin. Purchasing, persistence, file handling, download
 
 ## Current State
 
-The repository contains an early JavaFX login interface and initial domain classes such as `Game`, `Customer`, `Developer`, `Store`, and `GameFilters`.
+The repository contains an early JavaFX login interface and initial domain classes such as `Game`, `Customer`, `Developer`, and `Store`.
 
-Git setup, repository cleanup, the Gradle wrapper, and the move toward the `com.khaled.laho` package are complete or underway. The next step is to finish the application package structure and replace the early interface with an FXML-based application shell.
+The game model is being prepared for the offline catalog. Games now use stable UUID identifiers, `BigDecimal` prices, multiple genres, multiple features, and immutable catalog collections. Dedicated enums replace the earlier string-based genre and type fields.
+
+Git setup, repository cleanup, the Gradle wrapper, and the move to the `com.khaled.laho` package are complete. The next steps are to finish the game domain model, create the remaining application package structure, and replace the early interface with an FXML-based application shell.
 
 ## Getting Started
 
@@ -121,7 +123,7 @@ gradle build
 - [ ] Create the application package structure
 - [ ] Introduce FXML views and navigation
 - [ ] Improve the game domain model
-- [ ] Add genre and feature enums
+- [x] Add genre and feature enums
 - [ ] Load fictional games from JSON
 - [ ] Build Store and game-details screens
 - [ ] Add search, filtering, and sorting
