@@ -1,7 +1,6 @@
 package com.khaled.laho.model;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -15,11 +14,11 @@ public class Game {
 	private String description; // Description (bio/summary)
 	private double size; // Game size in GB
 	private Set<GameGenre> genres; // e.g., RPG, Shooter
-	private Set<GameFeatures> features; // e.g., Single Player, Online
+	private Set<GameFeature> features; // e.g., Single Player, Online
 	private BigDecimal price; // Price in USD (or local currency)
 
 	// Constructor
-	public Game(UUID id, String title, String coverImageUrl, String description, double size, Set<GameGenre> genres, Set<GameFeatures> features,
+	public Game(UUID id, String title, String coverImageUrl, String description, double size, Set<GameGenre> genres, Set<GameFeature> features,
 			BigDecimal price, List<String> screenshots) {
 		this.id = id;
 		this.title = title;
@@ -41,21 +40,14 @@ public class Game {
 		return title;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
 
 	public String getCoverImageUrl() {
 		return coverImageUrl;
 	}
 
-	public void setCoverImageUrl(String coverImageUrl) {
-		this.coverImageUrl = coverImageUrl;
-	}
-
 	
 	public List<String> getScreenshots() {
-		return List.copyOf(screenshots);
+		return screenshots;
 	}
 
 
@@ -63,41 +55,26 @@ public class Game {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
 	public double getSize() {
 		return size;
 	}
 
-	public void setSize(double size) {
-		this.size = size;
-	}
 
 	public Set<GameGenre> getGenres() {
 		return genres;
 	}
 
-	public void setGenres(Set<GameGenre> genres) {
-		this.genres = Set.copyOf(genres);
-	}
 
-	public Set<GameFeatures> getFeatures() {
+	public Set<GameFeature> getFeatures() {
 		return features;
 	}
 
-	public void setFeatures(Set<GameFeatures> features) {
-		this.features = Set.copyOf(features);
-	}
 
 	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
 
 	@Override
 	public String toString() {
