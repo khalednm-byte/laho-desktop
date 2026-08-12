@@ -7,24 +7,24 @@ import java.util.UUID;
 
 public class Game {
 
-	private UUID id;
-	private String title; // Game title
-	private String coverImageUrl; // Main cover
-	private List<String> screenshots; // Gameplay images
-	private String description; // Description (bio/summary)
-	private double size; // Game size in GB
-	private Set<GameGenre> genres; // e.g., RPG, Shooter
-	private Set<GameFeature> features; // e.g., Single Player, Online
-	private BigDecimal price; // Price in USD (or local currency)
+	private final UUID id;
+	private final String title; // Game title
+	private final String coverImageUrl; // Main cover
+	private final List<String> screenshots; // Gameplay images
+	private final String description; // Description (bio/summary)
+	private final double sizeInGb; // Game size in GB
+	private final Set<GameGenre> genres; // e.g., RPG, Shooter
+	private final Set<GameFeature> features; // e.g., Single Player, Online
+	private final BigDecimal price; // Price in USD (or local currency)
 
 	// Constructor
-	public Game(UUID id, String title, String coverImageUrl, String description, double size, Set<GameGenre> genres, Set<GameFeature> features,
+	public Game(UUID id, String title, String coverImageUrl, String description, double sizeInGb, Set<GameGenre> genres, Set<GameFeature> features,
 			BigDecimal price, List<String> screenshots) {
 		this.id = id;
 		this.title = title;
 		this.coverImageUrl = coverImageUrl;
 		this.description = description;
-		this.size = size;
+		this.sizeInGb = sizeInGb;
 		this.genres = Set.copyOf(genres);
 		this.features = Set.copyOf(features);
 		this.price = price;
@@ -56,8 +56,8 @@ public class Game {
 	}
 
 
-	public double getSize() {
-		return size;
+	public double getSizeInGb() {
+		return sizeInGb;
 	}
 
 
@@ -78,7 +78,7 @@ public class Game {
 
 	@Override
 	public String toString() {
-		return "Game{" + "title='" + title + '\'' + ", genres='" + genres + '\'' + ", features='" + features + '\'' + ", size="
-				+ size + "GB" + ", price=" + price + '}';
+		return "Game{" + "title='" + title + '\'' + ", genres='" + genres + '\'' + ", features='" + features + '\'' + ", size (GB)="
+				+ sizeInGb + "GB" + ", price=" + price + '}';
 	}
 }

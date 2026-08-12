@@ -2,5 +2,7 @@ package com.khaled.laho.model;
 
 public enum GameFeature {
 	
-	SINGLE_PLAYER, MULTIPLAYER, CO_OP
+	SINGLE_PLAYER, 
+	MULTIPLAYER, 
+	CO_OP
 }
