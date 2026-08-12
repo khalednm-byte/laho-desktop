@@ -1,7 +1,12 @@
 package com.khaled.laho.app;
 
-import javafx.application.Application; 
-import static javafx.application.Application.launch; 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+
+import static javafx.application.Application.launch;
+
+import java.io.IOException;
+
 import javafx.geometry.Insets; 
 import javafx.geometry.Pos; 
 import javafx.scene.Scene; 
@@ -14,60 +19,16 @@ import javafx.stage.Stage;
 
 public class Main extends Application { 
    @Override 
-   public void start(Stage stage) {      
-      //creating label email 
-      Text text1 = new Text("Email");       
+   public void start(Stage stage) throws IOException {      
       
-      //creating label password 
-      Text text2 = new Text("Password"); 
-       
-      //Creating Text Filed for email        
-      TextField textField1 = new TextField();       
-      
-      //Creating Text Filed for password        
-      PasswordField textField2 = new PasswordField();  
-       
-      //Creating Buttons 
-      Button button1 = new Button("Submit"); 
-      Button button2 = new Button("Clear");  
-      
-      //Creating a Grid Pane 
-      GridPane gridPane = new GridPane();    
-      
-      //Setting size for the pane 
-      gridPane.setMinSize(400, 200);
-      
-      //Setting the padding  
-      gridPane.setPadding(new Insets(10, 10, 10, 10)); 
-      
-      //Setting the vertical and horizontal gaps between the columns 
-      gridPane.setVgap(5); 
-      gridPane.setHgap(5);       
-      
-      //Setting the Grid alignment 
-      gridPane.setAlignment(Pos.CENTER); 
-       
-      //Arranging all the nodes in the grid 
-      gridPane.add(text1, 0, 0); 
-      gridPane.add(textField1, 1, 0); 
-      gridPane.add(text2, 0, 1);       
-      gridPane.add(textField2, 1, 1); 
-      gridPane.add(button1, 0, 2); 
-      gridPane.add(button2, 1, 2); 
-       
-      //Styling nodes  
-      button1.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;"); 
-      button2.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;"); 
-       
-      text1.setStyle("-fx-font: normal bold 20px 'serif' "); 
-      text2.setStyle("-fx-font: normal bold 20px 'serif' ");  
-      gridPane.setStyle("-fx-background-color: BEIGE;"); 
-       
+	   FXMLLoader loader = new FXMLLoader(
+			   Main.class.getResource("/com/khaled/laho/fxml/app-shell.fxml")
+			   );
       // Creating a scene object 
-      Scene scene = new Scene(gridPane, 400, 300); 
+      Scene scene = new Scene(loader.load(), 900, 600); 
        
       // Setting title to the Stage   
-      stage.setTitle("CSS Example in JavaFX"); 
+      stage.setTitle("لهو - LAHO"); 
          
       // Adding scene to the stage 
       stage.setScene(scene);
