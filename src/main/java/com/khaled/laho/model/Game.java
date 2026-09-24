@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Game {
 
@@ -18,8 +20,17 @@ public class Game {
 	private final BigDecimal price; // Price in USD (or local currency)
 
 	// Constructor
-	public Game(UUID id, String title, String coverImageUrl, String description, double sizeInGb, Set<GameGenre> genres, Set<GameFeature> features,
-			BigDecimal price, List<String> screenshots) {
+	@JsonCreator
+	public Game(
+			@JsonProperty("id") UUID id, 
+			@JsonProperty("title") String title, 
+			@JsonProperty("coverImageUrl") String coverImageUrl, 
+			@JsonProperty("description") String description, 
+			@JsonProperty("sizeInGb") double sizeInGb, 
+			@JsonProperty("genres") Set<GameGenre> genres, 
+			@JsonProperty("features") Set<GameFeature> features,
+			@JsonProperty("price") BigDecimal price, 
+			@JsonProperty("screenshots") List<String> screenshots) {
 		this.id = id;
 		this.title = title;
 		this.coverImageUrl = coverImageUrl;
