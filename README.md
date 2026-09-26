@@ -2,7 +2,7 @@
 
 Laho Desktop is a JavaFX game storefront and launcher prototype built as a portfolio-quality desktop application. The project focuses on clean architecture, local catalog browsing, simulated purchases, persistent libraries, and eventually safe game installation and launching.
 
-> **Project status:** Early development. Repository cleanup and Git setup are complete, and the application structure is now being standardized before the main storefront features are implemented.
+> **Project status:** Milestone 1 is in progress. The FXML application shell displays a local JSON catalog in a basic Store view, with catalog loading covered by automated tests. The Library remains a placeholder; game details, search, purchasing, and ownership persistence are still planned.
 
 ## Current Goal
 
@@ -37,20 +37,19 @@ Build a fully offline desktop experience where a user can:
 ### Current
 
 - Java 21
-- JavaFX 21
-- Gradle Wrapper
+- JavaFX 21 with FXML
+- Gradle 8.9 via the Gradle Wrapper
 - JUnit 5
+- Jackson Databind
 
 ### Planned for the offline milestone
 
-- JavaFX FXML
 - JavaFX CSS
-- Jackson Databind
 - SQLite JDBC
 
 ## Architecture
 
-The application is being organized around the following flow:
+The target architecture for the completed offline milestone is:
 
 ```text
 JavaFX Views and FXML
@@ -64,28 +63,44 @@ Repositories
 JSON and SQLite
 ```
 
-Planned responsibilities include:
+The current implementation has these responsibilities:
 
 ```text
-app/          Application startup
-controller/   JavaFX events and screen state
+app/          Startup and connecting the repository to the UI
+controller/   FXML interaction, shell navigation, and game display
 model/        Domain models and enums
-service/      Application behavior
-repository/   Data-access contracts and implementations
-navigation/   Screen navigation
-persistence/  JSON, SQLite, and local storage support
-resources/    FXML, CSS, JSON, and images
+repository/   Catalog contract and JSON loading
 ```
+
+Java packages live under `src/main/java/com/khaled/laho`. FXML views and the catalog are under `src/main/resources/com/khaled/laho`, in `fxml/` and `data/` respectively. Tests live under `src/test/java`, with test-only data under `src/test/resources`.
+
+The `service/`, `navigation/`, and `persistence/` packages are planned and will be introduced as their responsibilities become necessary. Navigation currently lives in `AppShellController`; JSON parsing currently lives in `JsonCatalogRepository`.
 
 Controllers should remain thin. Purchasing, persistence, file handling, downloading, and game-launching logic belong in services and repositories rather than JavaFX event handlers.
 
 ## Current State
 
-The repository contains an early JavaFX login interface and initial domain classes such as `Game`, `Customer`, `Developer`, and `Store`.
+The early login form has been replaced by an FXML application shell with Store and Library buttons. The Store is shown on startup and displays each game's title, price, and description. Switching to Library shows a placeholder; switching back restores the existing Store view without reading the catalog again.
 
-The game model is being prepared for the offline catalog. Games now use stable UUID identifiers, `BigDecimal` prices, multiple genres, multiple features, and immutable catalog collections. Dedicated enums replace the earlier string-based genre and type fields.
+The current catalog contains one fictional game, **Royal Blood**, in `src/main/resources/com/khaled/laho/data/game.json`. Cover art and screenshots are not displayed yet.
 
-Git setup, repository cleanup, the Gradle wrapper, and the move to the `com.khaled.laho` package are complete. The next steps are to finish the game domain model, create the remaining application package structure, and replace the early interface with an FXML-based application shell.
+The `Game` model has final fields, constructor-provided UUIDs, `BigDecimal` prices, `GameGenre` and `GameFeature` enum sets, and defensive collection copies. Jackson constructor annotations map JSON fields to these values. Catalog UUIDs are stored in JSON and preserved when games are loaded.
+
+`CatalogRepository` defines `findAll()`. `JsonCatalogRepository` implements it using Jackson, closes the input stream automatically, and throws descriptive exceptions for missing resources or unreadable/invalid JSON.
+
+At startup:
+
+1. `Main` creates the catalog repository and loads `app-shell.fxml`.
+2. The repository reads the catalog and returns a `List<Game>`.
+3. `Main` passes that list to `AppShellController.loadStore()`.
+4. The shell loads `store.fxml` and passes the games to its `StoreController`.
+5. `StoreController.displayGames()` creates labels for each game, and the shell displays the populated Store view.
+
+Three JUnit tests cover successful loading, a missing resource, and malformed JSON. The successful-loading test checks the title, UUID, price, genres, and features. These tests cover the repository; automated UI and library tests are not implemented yet.
+
+`Customer`, `Developer`, and the model class `Store` remain early placeholders and do not implement purchasing or ownership. There is no SQLite database or persistent library yet.
+
+The next development focus is reusable game entries and a game-details view, building on the working catalog-to-Store flow.
 
 ## Getting Started
 
@@ -93,9 +108,29 @@ Git setup, repository cleanup, the Gradle wrapper, and the move to the `com.khal
 
 - JDK 21
 
-The project uses the Gradle Wrapper, so a separate Gradle installation is not required.
+The project uses the Gradle Wrapper, so a separate Gradle installation is not required. Run the commands below from the project root. The first build needs access to download Gradle and dependencies; the application's catalog data is local.
 
-### Linux and macOS
+### Windows PowerShell
+
+Run the application:
+
+```powershell
+.\gradlew.bat run
+```
+
+Run the tests:
+
+```powershell
+.\gradlew.bat test
+```
+
+Build the project:
+
+```powershell
+.\gradlew.bat build
+```
+
+### Git Bash, Linux, and macOS
 
 Run the application:
 
@@ -112,25 +147,45 @@ Run the tests:
 Build the project:
 
 ```bash
-gradle build
+./gradlew build
 ```
+
+### Optional project-local Gradle cache
+
+If the default Gradle cache location is not writable, use the ignored `.gradle-user-home` directory inside the project:
+
+```powershell
+.\gradlew.bat --gradle-user-home .gradle-user-home test
+```
+
+In Git Bash, Linux, or macOS:
+
+```bash
+./gradlew --gradle-user-home .gradle-user-home test
+```
+
+The same option can be used with `run` or `build`. This cache is local tooling data and is excluded from Git.
 
 ## Roadmap
 
 ### Milestone 1 — Offline Storefront
 
 - [x] Clean and reorganize the project
-- [ ] Create the application package structure
-- [ ] Introduce FXML views and navigation
-- [ ] Improve the game domain model
+- [x] Establish startup, controller, model, and repository packages
+- [x] Introduce the FXML shell and basic Store/Library navigation
+- [x] Create the immutable game catalog model
 - [x] Add genre and feature enums
-- [ ] Load fictional games from JSON
-- [ ] Build Store and game-details screens
+- [x] Load the local fictional game catalog from JSON
+- [x] Display game titles, prices, and descriptions in a basic Store view
+- [x] Test catalog loading, missing resources, and malformed JSON
+- [ ] Introduce service, navigation, and persistence packages as needed
+- [ ] Build reusable game cards
+- [ ] Add a game-details screen and navigation from the Store
 - [ ] Add search, filtering, and sorting
 - [ ] Add simulated purchasing
-- [ ] Build the Library screen
+- [ ] Replace the Library placeholder with an owned-games screen
 - [ ] Persist ownership records with SQLite
-- [ ] Add tests for catalog and library behavior
+- [ ] Add tests for search, purchasing, library behavior, and ownership persistence
 - [ ] Improve styling after the complete flow works
 
 ### Milestone 2 — Desktop Launcher
